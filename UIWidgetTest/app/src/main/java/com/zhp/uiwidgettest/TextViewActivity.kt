@@ -24,6 +24,7 @@ class TextViewActivity : AppCompatActivity(), View.OnClickListener {
         when (v?.id) {
             R.id.button -> {
                 Toast.makeText(this, "Typed ${binding.editText.text}", Toast.LENGTH_SHORT).show()
+                binding.imageView.setImageResource(R.drawable.logo)
             }
         }
     }
