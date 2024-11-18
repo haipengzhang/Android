@@ -21,7 +21,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
 
-        adapter = MessageAdapter(msgList)
+        if (!::adapter.isInitialized) {
+            adapter = MessageAdapter(msgList)
+        }
         binding.recyclerView.adapter = adapter
 
         binding.send.setOnClickListener(this)
