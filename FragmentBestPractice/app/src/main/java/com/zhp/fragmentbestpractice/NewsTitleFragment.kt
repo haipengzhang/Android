@@ -51,7 +51,7 @@ class NewsTitleFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        newsContentFragment = childFragmentManager.findFragmentById(R.id.newsContentLayout) as? NewsContentFragment
+        newsContentFragment = activity?.supportFragmentManager?.findFragmentById(R.id.newsContentFrag) as? NewsContentFragment
     }
 
     inner class NewsAdapter(val newsList: List<News>, private val onItemClick: (News) -> Unit):
