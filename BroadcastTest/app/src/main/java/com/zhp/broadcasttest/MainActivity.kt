@@ -28,7 +28,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent("com.zhp.broadcast.MY_BROADCAST")
             // 设置intent是发送给那个包的
             intent.setPackage(packageName)
-            sendBroadcast(intent)
+            // sendBroadcast(intent)
+
+            // 第二个参数是权限相关
+            sendOrderedBroadcast(intent, null)
         }
 
         setContentView(mainBinding.root)

@@ -1,0 +1,24 @@
+package com.zhp.broadcastbestpractice
+
+import android.app.Activity
+
+object ActivityCollector {
+    private val activities = ArrayList<Activity>()
+
+    fun addActivity(activity: Activity) {
+        activities.add(activity)
+    }
+
+    fun removeActivity(activity: Activity) {
+        activities.remove(activity)
+    }
+
+    fun finishAll() {
+        for (item in activities) {
+            if (!item.isFinishing) {
+                item.finish()
+            }
+        }
+        activities.clear()
+    }
+}
