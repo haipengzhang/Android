@@ -1,5 +1,6 @@
 package com.zhp.broadcastbestpractice
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -16,6 +17,16 @@ class LoginActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val prefs = getPreferences(Context.MODE_PRIVATE)
+        val account = prefs.getString("account", null)
+        val password = prefs.getString("password", null)
+        if (account != null && password != null) {
+            binding.accountEdit.setText(account)
+            binding.passwordEdit.setText(password)
+            binding.rememberPass.isChecked = true
+        }
+
         binding.login.setOnClickListener {
             val account = binding.accountEdit.text.toString()
             val password = binding.passwordEdit.text.toString()
@@ -24,6 +35,15 @@ class LoginActivity : BaseActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
+
+                val editor = prefs.edit()
+                if (binding.rememberPass.isChecked) {
+                    editor.putString("account", account)
+                    editor.putString("password", password)
+                } else {
+                    editor.clear()
+                }
+                editor.apply()
             } else {
                 Toast.makeText(this, "account or password is invalid",
                     Toast.LENGTH_SHORT).show()
