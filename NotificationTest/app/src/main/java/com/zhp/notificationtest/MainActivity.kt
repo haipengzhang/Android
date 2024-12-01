@@ -24,7 +24,12 @@ class MainActivity : AppCompatActivity() {
             val channel = NotificationChannel("normal", "Normal", NotificationManager.IMPORTANCE_DEFAULT)
             manager.createNotificationChannel(channel)
 
+            val channel2 = NotificationChannel("important", "Important", NotificationManager.IMPORTANCE_HIGH)
+            manager.createNotificationChannel(channel2)
+
             binding.sendNotice.setOnClickListener {
+                /*
+                // normal channel notification
                 val intent = Intent(this, NotificationActivity::class.java)
                 val pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE)
                 val notification = NotificationCompat.Builder(this, "normal")
@@ -37,6 +42,19 @@ class MainActivity : AppCompatActivity() {
                     .setAutoCancel(true)
                     .build()
 
+                manager.notify(1, notification)
+                */
+
+                // important channel notification
+                val intent = Intent(this, NotificationActivity::class.java)
+                val pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE)
+                val notification = NotificationCompat.Builder(this, "important")
+                    .setContentTitle("This is important content title")
+                    .setContentText("This is important content text")
+                    .setSmallIcon(android.R.drawable.ic_menu_camera)
+                    .setContentIntent(pi)
+                    .setAutoCancel(true)
+                    .build()
                 manager.notify(1, notification)
             }
         }
