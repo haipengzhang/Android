@@ -13,6 +13,7 @@ import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import kotlin.concurrent.thread
 
 class MyService : Service() {
     private val mBinder = DownloadBinder()

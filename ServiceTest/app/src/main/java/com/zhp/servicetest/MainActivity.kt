@@ -1,11 +1,13 @@
 package com.zhp.servicetest
 
+import MyIntentService
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.zhp.servicetest.databinding.ActivityMainBinding
 
@@ -44,6 +46,13 @@ class MainActivity : AppCompatActivity() {
         }
         binding.unbindServiceBtn.setOnClickListener {
             unbindService(connection) // 解绑Service
+        }
+
+        binding.startIntentServiceBtn.setOnClickListener {
+            // 打印主线程的id， 已经废弃了 启动不了
+            Log.d("MainActivity", "Thread id is ${Thread.currentThread().name}")
+            val intent = Intent(this, MyIntentService::class.java)
+            startService(intent)
         }
     }
 }
