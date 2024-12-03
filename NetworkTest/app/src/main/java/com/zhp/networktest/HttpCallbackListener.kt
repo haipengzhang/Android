@@ -1,4 +1,6 @@
 package com.zhp.networktest
 
-class HttpCallbackListener {
+interface HttpCallbackListener {
+    fun onFinish(response: String)
+    fun onError(e: Exception)
 }
