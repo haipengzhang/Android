@@ -1,6 +1,7 @@
 package com.zhp.materialtest
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,15 @@ class FruitAdapter(val context: Context, val fruitList: List<Fruit>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val fruit = fruitList[position]
         holder.fruitName.text = fruit.name
+        holder.itemView.setOnClickListener {
+            val position = holder.adapterPosition
+            val fruit = fruitList[position]
+            val intent = Intent(context, FruitActivity::class.java).apply {
+                putExtra(FruitActivity.FRUIT_NAME, fruit.name)
+                putExtra(FruitActivity.FRUIT_IMAGE_ID, fruit.imageId)
+            }
+            context.startActivity(intent)
+        }
         Glide.with(context).load(fruit.imageId).into(holder.fruitImage)
     }
 
