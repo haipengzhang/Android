@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-kapt") // 使用 id 方式添加 kapt 插件
 }
 
 android {
@@ -45,6 +46,14 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
-    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+    implementation libs.androidx.lifecycle.extensions
+    implementation libs.androidx.lifecycle.livedata.ktx
+    implementation libs.androidx.room.runtime
+    // 确保 WorkManager 版本为 2.7.0 或以上
+    // 从 Android 12 (API 级别 31) 开始，使用 PendingIntent 时，必须显式地指定 FLAG_IMMUTABLE 或 FLAG_MUTABLE 标志。
+    // WorkManager 在内部使用了 PendingIntent，而你的项目可能正在使用较旧的版本，没有适配 Android 12 的要求。所以指定2.8.1
+    implementation("androidx.work:work-runtime-ktx:2.8.1")
+
+    // Kotlin Annotation Processing Tool，用于引入需要注解处理器的依赖。
+    kapt "androidx.room:room-compiler:2.6.1"
 }
